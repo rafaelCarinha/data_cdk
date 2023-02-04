@@ -1,0 +1,7 @@
+# Workspace Accounts
+
+ACCOUNTS:
+  Account1:
+    ACCOUNT_ID: 500948450342
+    REGION: us-west-1
+    ACCOUNT_NAME: sample

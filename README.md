@@ -49,10 +49,13 @@ command.
 
 ## Useful commands
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+ * `cdk ls --context environment=DEV --profile waymark`          list all stacks in the app
+ * `cdk diff --context environment=DEV`        compare deployed stack with current state
+ * `cdk docs`        open CDK documentation 
+ * `cdk bootstrap --context environment=DEV --profile waymark` Bootstraps CloudFormation
+ * `cdk deploy --all --context environment=DEV --profile waymark` Deploy all the Stacks in the profile for the DEV environment
+ * `cdk deploy DEV-Waymark-Data-AthenaStack --context environment=DEV --profile waymark` Deploy the Athena Stack
+ * `cdk deploy DEV-Waymark-Data-VPCStack --context environment=DEV --profile waymark` Deploy the VPC Stack
+
 
 Enjoy!

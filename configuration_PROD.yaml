@@ -1,0 +1,23 @@
+# Common CDK Stack Configuration
+
+VPC:
+  VPC_CIDR: 172.31.0.0/16
+  VPC_MAX_AZS: 2
+  VPC_NAT_GATEWAY_QUANTITY: 1
+S3:
+  STAGED_BUCKET: staged
+  SHARED_BUCKET: shared
+  COMBINED_BUCKET: combined
+GLUE:
+  SERVICE_PRINCIPAL: glue.amazonaws.com
+  MANAGED_POLICY: arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole,arn:aws:iam::aws:policy/AmazonRedshiftAllCommandsFullAccess,arn:aws:iam::aws:policy/AmazonS3FullAccess
+  CRAWLER_DELETE_BEHAVIOR: LOG
+ATHENA:
+  S3_QUERY_OUTPUT_BUCKET: athena-queries
+  QUERY_ENCRYPTION_OPTION: SSE_S3
+REDSHIFT:
+  MASTER_USERNAME: admin
+  MASTER_PASSWORD: P4ssW0rD!
+  EC2_INSTANCE_TYPE: dc2.large
+  MANAGED_POLICY: arn:aws:iam::aws:policy/AmazonRedshiftAllCommandsFullAccess
+  CUSTOM_MANAGED_POLICY_NAME: RedshiftGlueCreateAction
