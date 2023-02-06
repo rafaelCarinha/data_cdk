@@ -5,9 +5,8 @@ VPC:
   VPC_MAX_AZS: 2
   VPC_NAT_GATEWAY_QUANTITY: 1
 S3:
-  STAGED_BUCKET: staged
-  SHARED_BUCKET: shared
-  COMBINED_BUCKET: combined
+  RAW_BUCKET: raw
+  PROCESSED_BUCKET: processed
 GLUE:
   SERVICE_PRINCIPAL: glue.amazonaws.com
   MANAGED_POLICY: arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole,arn:aws:iam::aws:policy/AmazonRedshiftAllCommandsFullAccess,arn:aws:iam::aws:policy/AmazonS3FullAccess
@@ -15,7 +14,7 @@ GLUE:
 ATHENA:
   S3_QUERY_OUTPUT_BUCKET: athena-queries
   QUERY_ENCRYPTION_OPTION: SSE_S3
-REDSHIFT:
+REDSHIFT: # TODO - Change to KMS the Redshift Credentials
   MASTER_USERNAME: admin
   MASTER_PASSWORD: P4ssW0rD!
   EC2_INSTANCE_TYPE: dc2.large

@@ -19,11 +19,15 @@ class GlueStack(Stack):
             data = yaml.load(f, Loader=SafeLoader)
 
             s3_config = data['S3']
-            staged_bucket_name = s3_config['STAGED_BUCKET']
+            raw_bucket_name = s3_config['RAW_BUCKET']
             glue_config = data['GLUE']
             service_principal = glue_config['SERVICE_PRINCIPAL']
             managed_policy = glue_config['MANAGED_POLICY']
             crawler_delete_behavior = glue_config['CRAWLER_DELETE_BEHAVIOR']
+
+            # TODO - Create Glue Trigger for each Crawler Organization
+            # TODO - Create Glue Trigger for each Job Organization
+            # TODO - Create Workflow for each Organization
 
             environment = environment.lower()
             org = org.lower()
@@ -71,24 +75,6 @@ class GlueStack(Stack):
                                                ]
                                                )
 
-            # Define paths for scripts and data
-            staged = f"s3://{environment}-waymark-{org}-{staged_bucket_name}"
-
-            glue_crawler_s3 = glue.CfnCrawler(self, "glue-crawler-s3",
-                                              database_name=f"redshift-database-{org}",
-                                              name=f"{org}-crawler",
-                                              table_prefix="redshift/",
-                                              role=glue_crawler_role.role_name,
-                                              schema_change_policy=glue.CfnCrawler.SchemaChangePolicyProperty(
-                                                  delete_behavior=crawler_delete_behavior
-                                              ),
-                                              targets=glue.CfnCrawler.TargetsProperty(
-                                                  s3_targets=[glue.CfnCrawler.S3TargetProperty(
-                                                      path=staged,
-                                                  )]
-                                              ),
-                                              )
-
             # Create Crawlers/Databases for the associated Organizations
             for organizations_account in organization_account_list:
                 organization_account_name = organizations_account['account_name'].lower()
@@ -102,7 +88,7 @@ class GlueStack(Stack):
                                            )
 
                 # Define paths for scripts and data
-                staged = f"s3://{environment}-waymark-{organization_account_name}-{staged_bucket_name}"
+                raw = f"s3://{environment}-waymark-{organization_account_name}-{raw_bucket_name}"
 
                 glue_crawler_s3 = glue.CfnCrawler(self, f"glue-crawler-s3-{organization_account_name}",
                                                   database_name=f"database-{organization_account_name}",
@@ -113,7 +99,7 @@ class GlueStack(Stack):
                                                   ),
                                                   targets=glue.CfnCrawler.TargetsProperty(
                                                       s3_targets=[glue.CfnCrawler.S3TargetProperty(
-                                                          path=staged,
+                                                          path=raw,
                                                       )]
                                                   ),
                                                   )

@@ -43,7 +43,7 @@ with open(f'configuration_{environment}.yaml') as f:
 
 
 organization_account_list = []
-organization_account_names = ['claims', 'claims-post', 'eligibility', 'hl7']
+organization_account_names = ['claims', 'claims-post', 'eligibility', 'hl7']  # TODO - Externalize property
 
 for organization_account_name in organization_account_names:
     account_dict = {'account_name': f"{organization_account_name}"}

@@ -17,10 +17,8 @@ class S3Stack(Stack):
             data = yaml.load(f, Loader=SafeLoader)
 
             s3_config = data['S3']
-            staged_bucket_name = s3_config['STAGED_BUCKET']
-            shared_bucket_name = s3_config['SHARED_BUCKET']
-            combined_bucket_name = s3_config['COMBINED_BUCKET']
-            bucket_list = [staged_bucket_name, shared_bucket_name, combined_bucket_name]
+            processed_bucket_name = s3_config['PROCESSED_BUCKET']
+            bucket_list = [processed_bucket_name]
 
             environment = environment.lower()
 

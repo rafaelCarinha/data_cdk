@@ -31,6 +31,9 @@ class RedshiftStack(Stack):
             environment = environment.lower()
             org = org.lower()
 
+            # TODO - Increase Redshift Security
+            # TODO - Create Redshift Spectrum(federated queries) for AURORA(Waymark Core and LightHouse)
+
             self.custom_spectrum_policy = iam.Policy(self,
                                                      custom_managed_policy_name + f"-{org}-construct",
                                                      policy_name=custom_managed_policy_name + f"-{org}",

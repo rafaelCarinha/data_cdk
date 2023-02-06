@@ -17,6 +17,8 @@ class VPCStack(Stack):
             vpc_max_azs = vpc['VPC_MAX_AZS']
             vpc_nat_gateway_quantity = vpc['VPC_NAT_GATEWAY_QUANTITY']
 
+            # TODO - Change VPC to the existing Waymark VPC, or open a VPC endpoint
+
             self.vpc = ec2.Vpc(self, construct_id,
                                cidr=vpc_cidr,
                                max_azs=vpc_max_azs,
